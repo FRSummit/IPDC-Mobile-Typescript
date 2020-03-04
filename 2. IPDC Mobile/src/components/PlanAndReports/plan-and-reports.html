@@ -1,0 +1,29 @@
+<div class="plan-and-reports">
+    <v-ons-page style="margin-top: 56px;">
+      <div class="plan-and-reports">
+          <div class="create-plan-btn">
+            <button @click="createPlanBtnClick" class="waves-effect waves-light btn create-btn">Create Plan</button>
+          </div>
+          <div class="center search">
+              <div id="search-input" placeholder="Search">
+                  <input type="search" class="hh search-input search-input--material" placeholder="Search">
+              </div>
+          </div>
+          <router-link :to="{ path: '/report-landing', params: { id: 1234 } }">Navigate to Page2</router-link>
+  
+          <div class="report-unit-sec">
+              <div class="row plan-and-report-row">
+                  <v-ons-card class="card-radius plan-card">
+                      <div>
+                          <!-- <router-link to='/planandreports/report_landing_page'> -->
+                              <div class="content" v-for="item in unit_items" :key="item.id" @click="unitItemClick(item.id)">
+                                  <p class="report-card">{{ item.description }}</p>
+                              </div>
+                          <!-- </router-link> -->
+                      </div>
+                  </v-ons-card>
+              </div>
+          </div>
+      </div>
+    </v-ons-page>
+</div>

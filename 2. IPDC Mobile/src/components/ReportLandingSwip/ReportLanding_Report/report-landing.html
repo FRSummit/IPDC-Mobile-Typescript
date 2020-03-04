@@ -1,0 +1,499 @@
+<div class="report-landing">
+    
+    <v-container>
+        <div class="submit-btn">
+        <v-row class="submit-btn-sec">
+            <v-col class="col-sm-4 btn-col">
+                <v-btn center large class="white--text report-page-btn" @click="saveReport">Save</v-btn>
+                <v-btn center large class="white--text report-page-btn right" @click="submitReport">Submit</v-btn>
+            </v-col>
+        </v-row>
+        </div>
+
+        <hr />
+        <div class="report-section">
+            <v-row class="v-row">
+                <v-col class="col-sm-3 report-col parent-col" style="padding: 0;">
+                    <p class="report-txt-ttl">Reports:</p>
+                </v-col>
+                <v-col class="col-sm-9 parent-col" style="padding: 0;">
+                    <!-- <p class="report-txt" v-if="!report">{{ selectedItem[0] }}</p>
+                    <p class="report-txt" v-if="report">{{ report }}</p> -->
+                    <p class="report-txt">Report</p>
+                </v-col>
+            </v-row>
+
+            <v-row class="v-row">
+                <v-col class="col-sm-3 report-col parent-col" style="padding: 0;">
+                    <p class="report-txt-ttl">Organization:</p>
+                </v-col>
+                <v-col class="col-sm-9 parent-col" style="padding: 0;">
+                    <!-- <p class="report-txt" v-if="!organization">{{ selectedItem[1] }}</p>
+                    <p class="report-txt" v-if="organization">{{ organization }}</p> -->
+                    <p class="report-txt">Organization</p>
+                </v-col>
+            </v-row>
+
+            <v-row class="v-row">
+                <v-col class="col-sm-3 report-col parent-col" style="padding: 0;">
+                    <p class="report-txt-ttl">Status:</p>
+                </v-col>
+                <v-col class="col-sm-9 parent-col" style="padding: 0;">
+                    <!-- <p class="report-txt" v-if="!status">{{ selectedItem[2] }}</p>
+                    <p class="report-txt" v-if="status">{{ status }}</p> -->
+                </v-col>
+                <p class="report-txt">Status</p>
+            </v-row>
+        </div>
+        <hr />
+
+
+        <div class="content-div">
+            <div>
+                <v-subheader class="content-header">Manpower &amp; Personal Contacts</v-subheader>
+                <v-card class="mx-auto" max-width="500">
+                <v-list class="list-box">
+                    <v-list-item-group>
+                    <router-link to='/plan-and-report-edit/manpower-and-personal-contacts' class="router-link">
+                        <v-list-item class="list-item-content first-li-item">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Member</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/manpower-and-personal-contacts' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Associate Member</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/manpower-and-personal-contacts' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Preliminary Member</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/manpower-and-personal-contacts' class="router-link">
+                        <v-list-item class="list-item-content last-li-item">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Supporter Member</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+                    </v-list-item-group>
+                </v-list>
+                </v-card>
+            </div>
+
+    <div>
+        <v-subheader class="content-header">Regular &amp; Special Meetings/Programs</v-subheader>
+        <v-card class="mx-auto" max-width="500">
+            <v-list class="list-box">
+                <v-list-item-group>
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Weekly Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Worker Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">CMS Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">SM Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Member Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Dawah Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">State Leader Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">State Outing</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Iftar Gatherings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Learning Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Social Dawah Programs</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Dawah Groups</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">NextG Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Tafsir Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Unit Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">BBQ Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Gathering Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Family Visit Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Eid Re-union Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to='/plan-and-report-edit/regular-and-special-meetings' class="router-link">
+                        <v-list-item class="list-item-content">
+                            <v-list-item-content>
+                            <v-list-item-title class="content-item-title">Other Meetings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </router-link>
+                </v-list-item-group>
+            </v-list>
+        </v-card>
+    </div>
+
+            <div>
+                <v-subheader class="content-header">Teaching &amp; Learning Program</v-subheader>
+                <v-card class="mx-auto" max-width="500">
+                <v-list class="list-box">
+                    <v-list-item-group>
+                        <router-link to='/plan-and-report-edit/teaching-and-learning-program' class="router-link">
+                            <v-list-item class="list-item-content first-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Group Study/Discussion</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/teaching-and-learning-program' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Study Circle(AM)</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/teaching-and-learning-program' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Study Circle</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/teaching-and-learning-program' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Practice Dars/Speech</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/teaching-and-learning-program' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Quran Study</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/teaching-and-learning-program' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Hadith Study</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/teaching-and-learning-program' class="router-link">
+                            <v-list-item class="list-item-content last-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Quran Class</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+                    </v-list-item-group>
+                </v-list>
+                </v-card>
+            </div>
+
+            <div>
+                <v-subheader class="content-header">Dawah Material Distribution</v-subheader>
+                <v-card class="mx-auto" max-width="500">
+                <v-list class="list-box">
+                    <v-list-item-group>
+                        <router-link to='/plan-and-report-edit/dawah-material-distribution' class="router-link">
+                            <v-list-item class="list-item-content first-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Book Sale</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/dawah-material-distribution' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Book Distribution</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/dawah-material-distribution' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Email Distribution</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/dawah-material-distribution' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">IPDC Leaflet Distribution</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/dawah-material-distribution' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Other Sale</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/dawah-material-distribution' class="router-link">
+                            <v-list-item class="list-item-content last-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Other Distribution</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+                    </v-list-item-group>
+                </v-list>
+                </v-card>
+            </div>
+
+            <div>
+                <v-subheader class="content-header">Finance</v-subheader>
+                <v-card class="mx-auto" max-width="500">
+                <v-list class="list-box">
+                    <v-list-item-group>
+                        <router-link to='/plan-and-report-edit/finance' class="router-link">
+                            <v-list-item class="list-item-content first-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Baitul-Mal</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/finance' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Masjid Project</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/finance' class="router-link">
+                            <v-list-item class="list-item-content last-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Masjid Table Bank</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+                    </v-list-item-group>
+                </v-list>
+                </v-card>
+            </div>
+
+            <div>
+                <v-subheader class="content-header">Social Welfare</v-subheader>
+                <v-card class="mx-auto" max-width="500">
+                <v-list class="list-box">
+                    <v-list-item-group>
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content first-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Qard-e-Hasana</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Patient Visit</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Social Visit</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Transport</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Shifting</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Shopping</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Food Distribution</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Clean Up Australia</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+
+                        <router-link to='/plan-and-report-edit/social-welfare' class="router-link">
+                            <v-list-item class="list-item-content last-li-item">
+                                <v-list-item-content>
+                                <v-list-item-title class="content-item-title">Other</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </router-link>
+                    </v-list-item-group>
+                </v-list>
+                </v-card>
+            </div>
+        </div>
+    </v-container>
+</div>
