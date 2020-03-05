@@ -1,0 +1,33 @@
+<div class="vhs-library">
+    <v-container class="container head-container">
+      <div class="content-div">
+        <form class="form-cls" @submit.prevent="onSubmit">
+          <v-subheader class="v-subheader content-header theme--light">
+            <div class="left" @click="backButton">
+              <ons-back-button>Reports</ons-back-button>
+            </div>
+            VHS/DVD/VCD/CD/Audio Library
+            <v-spacer />
+          </v-subheader>
+          <v-row class="row form-row">
+            <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+              <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="Last Period" single-line />
+            </v-col>
+            <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+              <input name="thisPeriod" v-model="thisPeriod" label="This Period" placeholder="This Period" single-line />
+            </v-col>
+            <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+              <input name="increased" v-model="increased" label="Increased" placeholder="Increased" single-line />
+            </v-col>
+            <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+              <input name="decreased" v-model="decreased" label="Decreased" placeholder="Decreased" single-line />
+            </v-col>
+            <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+              <input name="comment" v-model="comment" label="Comment" placeholder="Comment" single-line />
+            </v-col>
+            <button type="submit" large color="blue white--text" class="member save-btn">Save</button>
+          </v-row>
+        </form>
+      </div>
+    </v-container>
+  </div>
