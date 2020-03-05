@@ -1,0 +1,39 @@
+<div class="create-plan">
+    <v-ons-page class="create-plan-page" style="margin-top: 56px;">
+        <div class="create-plan">
+          <v-card-text class="pop-up" v-if="createdPlanStatus">{{ createdPlanStatus }}</v-card-text>
+          <table>
+              <thead>
+                  <tr>
+                    <th class="text-left">Description</th>
+                    <th class="text-left">Organization Type</th>
+                    <th class="text-left">Reporting Frequency</th>
+                    <th class="text-left">Parent</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr v-for="item in itemsMyOrganizations" :key="item.id">
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.description2 }}</td>
+                    <td>{{ item.description3 }}</td>
+                    <td>{{ item.description4 }}</td>
+                  </tr>
+              </tbody>
+          </table>
+          <v-container fluid>
+              <v-row>
+                  <v-col>
+                      <v-select placeholder="Reporting Period" dense id="my_organizations" name="my_organizations" type="text" class="reporting-period"></v-select>
+                  </v-col>
+              </v-row>
+          </v-container>
+          
+          <div style="margin: 0px 0px 30px; text-align: center;">
+              <div style="margin: 5px 0">
+                  <v-card-text>Before you get the buttton select an option from dropdown</v-card-text>
+                  <button class="waves-effect waves-light btn" @click="createPlan">Create Plan</button>
+              </div>
+          </div>
+        </div>
+    </v-ons-page>
+</div>

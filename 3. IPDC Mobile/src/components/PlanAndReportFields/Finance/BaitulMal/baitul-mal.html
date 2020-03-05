@@ -1,0 +1,63 @@
+<div class="associate-member">
+  <v-container class="head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="content-header">
+          <div class="left" @click="backButton">
+              <ons-back-button>Reports</ons-back-button>
+          </div>
+          BaitulMal
+          <v-spacer />
+        </v-subheader>
+        <v-row class="form-row">
+          <v-col cols="12" class="col-field">
+            <input name="workerPromiseIncreaseTarget" v-model="workerPromiseIncreaseTarget" label="Worker Promise Increase Target" placeholder="Worker Promise Increase Target" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field">
+            <input name="action" v-model="action" label="Action" placeholder="Action" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field">
+            <input name="otherSourceIncreaseTarget" v-model="otherSourceIncreaseTarget" label="Other Source Increase Target" placeholder="Other Source Increase Target" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field">
+            <input name="otherSourceAction" v-model="otherSourceAction" label="Other Source Action" placeholder="Other Source Action" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="totalIncreaseTarget" v-model="totalIncreaseTarget" label="Total Increase Target" placeholder="Total Increase Target" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="workerPromiseLastPeriod" v-model="workerPromiseLastPeriod" label="Worker Promise Last Period" placeholder="Worker Promise Last Period" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="workerPromiseThisPeriod" v-model="workerPromiseThisPeriod" label="Worker Promise This Period" placeholder="Worker Promise This Period" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="Last Period" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="collection" v-model="collection" label="Collection" placeholder="Collection" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="expense" v-model="expense" label="Expense" placeholder="Expense" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="nisabPaidToCentral" v-model="nisabPaidToCentral" label="Nisab Paid To Central" placeholder="Nisab Paid To Central" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="balance" v-model="balance" label="Balance" placeholder="Balance" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="workerPromiseIncreased" v-model="workerPromiseIncreased" label="Worker Promise Increased" placeholder="Worker Promise Increased" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="workerPromiseDecreased" v-model="workerPromiseDecreased" label="Worker Promise Decreased" placeholder="Worker Promise Decreased" single-line/>
+          </v-col>
+          <v-col cols="12" class="col-field" v-if="planOrReportTab === 'REPORT'">
+            <input name="comment" v-model="comment" label="Comment" placeholder="Comment" single-line/>
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn">Save</button>
+        </v-row>
+      </form>
+    </div>
+  </v-container>
+</div>
