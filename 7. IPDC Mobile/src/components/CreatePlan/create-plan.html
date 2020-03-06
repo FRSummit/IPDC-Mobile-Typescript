@@ -1,0 +1,46 @@
+<div class="create-plan">
+    <v-ons-page class="create-plan-page" style="margin-top: 56px;">
+        <div class="create-plan">
+          <v-card-text class="pop-up" v-if="createdPlanStatus">{{ createdPlanStatus }}</v-card-text>
+          <!-- <div>{{ itemsMyOrganizations }}</div> -->
+          <table>
+              <thead>
+                  <tr>
+                    <th class="text-left">Description</th>
+                    <th class="text-left">Organization Type</th>
+                    <th class="text-left">Reporting Frequency</th>
+                    <th class="text-left">Parent</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr v-for="(item, i) in itemsMyOrganizations" :key="i" @click="myOrganizationSelection(i)">
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.organizationTypeDescription }}</td>
+                    <td>{{ item.reportingFrequencyDescription }}</td>
+                    <td>{{ item.parent.description }}</td>
+                  </tr>
+              </tbody>
+          </table>
+          <v-container fluid>
+              <v-row>
+                  <v-col>
+                        <v-select :items="lists" placeholder="Reporting Period" dense id="my_organizations" name="my_organizations" type="text" class="reporting-period"></v-select>
+                  </v-col>
+              </v-row>
+          </v-container>
+          <div>
+                <label >Select one : </label>
+                <select style="display: inline-block;">
+                    <option v-for="(list, i) in selectedOrgReportingPeriod" :key="i">{{ list }}</option>
+                </select>
+          </div>
+          
+          <div style="margin: 0px 0px 30px; text-align: center;">
+              <div style="margin: 5px 0">
+                  <v-card-text>Before you get the buttton select an option from dropdown</v-card-text>
+                  <button class="waves-effect waves-light btn" @click="createPlan">Create Plan</button>
+              </div>
+          </div>
+        </div>
+    </v-ons-page>
+</div>
