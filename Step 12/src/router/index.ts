@@ -1,0 +1,493 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Store from '../store/index'
+import Auth0Callback from '../views/Auth0Callback.vue'
+import { authService } from '../auth-service'
+import Dashboard from '../components/Dashboard/Dashboard.vue'
+import Signin from '../components/Signin/Signin.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: '',
+    component: Signin,
+  },
+  {
+    path: '/auth0callback',
+    name: 'auth0callback',
+    component: Auth0Callback,
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    // meta: { requiresAuth: true }
+  },
+  // ----------------------------------------------
+  
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home
+  // },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue')
+  },
+  // {
+  //   path: '/contact',
+  //   name: 'Contact',
+  //   component: () => import('../views/Contact.vue')
+  // },
+  // {
+  //   path: '/memebrs',
+  //   name: 'Member',
+  //   component: () => import('../views/Member.vue'),
+  //   meta: { requiresAuth: true }
+  // },
+  {
+    path: '/report-landing',
+    name: 'Report Landing',
+    component: () => import('../components/ReportLanding/ReportLanding.vue')
+  },
+  {
+    path: '/plan-and-reports',
+    name: 'Plan and Reports',
+    component: () => import('../components/PlanAndReports/PlanAndReports.vue')
+  },
+  {
+    path: '/support',
+    name: 'Support',
+    component: () => import('../components/Support/Support.vue')
+  },
+  {
+    path: '/admin/create-plan',
+    name: 'Create Plan',
+    component: () => import('../components/CreatePlan/CreatePlan.vue')
+  },
+  {
+    path: '/sign-in',
+    name: 'Sign in',
+    component: () => import('../components/Signin/Signin.vue')
+  },
+  {
+    path: '/report-landing',
+    name: 'Report Landing',
+    component: () => import('../components/ReportLanding/ReportLanding.vue')
+  },
+  {
+    path: '/report-landing-plan',
+    name: 'Report Landing',
+    component: () => import('../components/ReportLandingSwip/ReportLandingPlan.vue')
+  },
+  {
+    path: '/report-landing-swip',
+    name: 'Report Landing',
+    component: () => import('../components/ReportLandingSwip/ReportLanding.vue')
+  },
+  {
+    path: '/report-landing-swip-report',
+    name: 'Report Landing Report',
+    component: () => import('../components/ReportLandingSwip/ReportLanding.vue')
+  },
+  // {
+  //   path: '/plan-support-swip',
+  //   name: 'Dashboard',
+  //   component: () => import('../components/PlanSupportSwip/PlanSupportSwip.vue')
+  // },
+  // Manpower Swip
+  {
+    path: '/plan-and-report-edit/manpower-and-personal-contacts',
+    name: 'Manpower And Personal Contact',
+    component: () => import('../components/PlanAndReportFields/ManpowerAndPersonalContacts/ManPowerSwip.vue')
+  },
+  // Manpower 
+  {
+    path: '/plan-and-report-edit/manpower-and-personal-contacts/member',
+    name: 'Member',
+    component: () => import('../components/PlanAndReportFields/ManpowerAndPersonalContacts/ManPowerSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/manpower-and-personal-contacts/associate-member',
+    name: 'Associate Member',
+    component: () => import('../components/PlanAndReportFields/ManpowerAndPersonalContacts/ManPowerSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/manpower-and-personal-contacts/preliminary-member',
+    name: 'Preliminary Member',
+    component: () => import('../components/PlanAndReportFields/ManpowerAndPersonalContacts/ManPowerSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/manpower-and-personal-contacts/supporter-member',
+    name: 'Supporter Member',
+    component: () => import('../components/PlanAndReportFields/ManpowerAndPersonalContacts/ManPowerSwip.vue')
+  },
+  // Manpower 
+  // Regular and Special Meetings Swip
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings',
+    name: 'Regular and Special Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  // Regular and Special Meetings
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/worker-meetings',
+    name: 'Worker Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/cms-meetings',
+    name: 'CMS Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/sm-meetings',
+    name: 'SM Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/member-meetings',
+    name: 'Member Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/dawah-meetings',
+    name: 'Dawah Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/state-leader-meetings',
+    name: 'State Leader Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/state-outing',
+    name: 'State Outing',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/iftar-gathering',
+    name: 'Iftar Gathering',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/learning-meetings',
+    name: 'Learning Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/social-dawa-program',
+    name: 'Social Dawah Programs',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/dawa-group',
+    name: 'Dawah group',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/next-g-meeting',
+    name: 'NextG Meeting',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/tafsir-meetings',
+    name: 'Tafsir Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/unit-meetings',
+    name: 'Unit Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/bbq-meetings',
+    name: 'BBQ Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/gathering-meetings',
+    name: 'Gathering Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/family-visit-meetings',
+    name: 'Family Visit Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/eid-re-union-meetings',
+    name: 'Eid Re-Union Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/regular-and-special-meetings/other-meeting',
+    name: 'Other Meetings',
+    component: () => import('../components/PlanAndReportFields/RegularAndSpecialMeetings/MeetingsSwip.vue')
+  },
+  // Regular and Special Meetings
+  // Teaching and Learning Program Swip
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program',
+    name: 'Teaching &amp; Learning Program',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  // Teaching and Learning Program
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/group-study-discussion',
+    name: 'Group Study Discussion',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/study-circle',
+    name: 'Study Circle',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/study-circle-am',
+    name: 'Study Circle AM',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/practice-darsSpeech',
+    name: 'Practice DarsSpeech',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/state-learning-camp',
+    name: 'State Learning Camp',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/quran-study',
+    name: 'Quran Study',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/hadith-study',
+    name: 'Hadith Study',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/quran-class',
+    name: 'Quran Class',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/weekend-islamic-school',
+    name: 'Weekend Islamic School',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/memorizing-ayat',
+    name: 'Memorizing Ayat',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/memorizing-hadith',
+    name: 'Memorizing Hadith',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/memorizing-doa',
+    name: 'Memorizing Doa',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/state-learning-session',
+    name: 'State Learning Session',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/state-qiyamul-lail',
+    name: 'State Qiyamul Lail',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/teaching-and-learning-program/other',
+    name: 'Other',
+    component: () => import('../components/PlanAndReportFields/TeachingAndLearningProgram/TeachingLearningSwip.vue')
+  },
+  // Teaching and Learning Program
+  // Dawah Material Distribution Swip
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution',
+    name: 'Dawah Material Distribution',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  // Dawah Material Distribution
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/book-sale',
+    name: 'Book Sale',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/book-distribution',
+    name: 'Book Distribution',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/audio-sale',
+    name: 'Audion sale',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/audio-distribution',
+    name: 'Audio Distribution',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/email-distribution',
+    name: 'Email Distribution',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/ipdc-leaflet-distribution',
+    name: 'IPDC Leaflet Distribution',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/other-sale',
+    name: 'Other Sale',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/dawah-material-distribution/other-distribution',
+    name: 'Other Distribution',
+    component: () => import('../components/PlanAndReportFields/DawahMaterialDistribution/DawahDistributionSwip.vue')
+  },
+  // Dawah Material Distribution
+  // Finance Swip
+  {
+    path: '/plan-and-report-edit/finance',
+    name: 'Finance',
+    component: () => import('../components/PlanAndReportFields/Finance/FinanceSwip.vue')
+  },
+  // Finance
+  {
+    path: '/plan-and-report-edit/finance/baitul-mal',
+    name: 'Baitulmal',
+    component: () => import('../components/PlanAndReportFields/Finance/FinanceSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/finance/masjid-project',
+    name: 'Masjid Project',
+    component: () => import('../components/PlanAndReportFields/Finance/FinanceSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/finance/masjid-table-bank',
+    name: 'Masjid Table Bank',
+    component: () => import('../components/PlanAndReportFields/Finance/FinanceSwip.vue')
+  },
+  // Finance
+  // Social Welfare Swip
+  {
+    path: '/plan-and-report-edit/social-welfare',
+    name: 'Social Welfare',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  // Social Welfare
+  {
+    path: '/plan-and-report-edit/social-welfare/Qard-e-Hasana',
+    name: 'Qard-e-Hasana',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/Patient-Visit',
+    name: 'Patient Visit',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/Social-Visit',
+    name: 'Social Visit',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/Transport',
+    name: 'Transport',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/Shifting',
+    name: 'Shifting',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/Shopping',
+    name: 'Shopping',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/food-distribution',
+    name: 'Food Distribution',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/Clean-Up',
+    name: 'Clean Up',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  {
+    path: '/plan-and-report-edit/social-welfare/Other',
+    name: 'Other',
+    component: () => import('../components/PlanAndReportFields/SocialWelfare/SocialWelfareSwip.vue')
+  },
+  // Social Welfare
+  {
+    path: '/plan-and-report-edit/other',
+    name: 'Other',
+    component: () => import('../components/PlanAndReportFields/Others/OtherSwip.vue')
+  }
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+});
+
+router.beforeEach( (to,from,next)=>{
+  if(to.matched.some(record=>record.path == "/auth0callback")){
+   console.log("router.beforeEach found /auth0callback url");
+   authService.handleAuthentication();
+   next(false);
+ }
+  let routerAuthCheck = false;  
+  if( localStorage.getItem('access_token') && localStorage.getItem('id_token') && localStorage.getItem('id_token_expires_at') ){
+    console.log('found local storage tokens');
+    // Check whether the current time is past the Access Token's expiry time
+    let expiresAt = JSON.parse(localStorage.getItem('id_token_expires_at')!);
+    // set localAuthTokenCheck true if unexpired / false if expired
+    routerAuthCheck = new Date().getTime() < expiresAt;  
+  }
+ 
+   // set global ui understanding of authentication
+   Store.commit('setUserIsAuthenticated', routerAuthCheck);
+ 
+   // check if the route to be accessed requires authorizaton
+   if (to.matched.some(record => record.meta.requiresAuth)) {
+     console.log('I am here, authentication checking, private page');
+     // Check if user is Authenticated
+     if(routerAuthCheck){
+       // user is Authenticated - allow access
+       console.log('Access granted, now we are logged in');
+       next();
+     }
+     else{
+       // user is not authenticated - redirect to login
+       router.replace('/login');
+     }
+     
+   }
+   // Allow page to load 
+   else{
+     console.log('no authentication, public page');
+     Store.commit('setUserIsAuthenticated', false);
+     next();
+   }
+ });
+
+export default router

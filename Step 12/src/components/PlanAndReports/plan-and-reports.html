@@ -1,0 +1,49 @@
+<div class="plan-and-reports">
+    <v-ons-page class="Page-MT">
+        <div class="plan-and-reports">
+            <div class="create-plan-btn">
+                <button @click="createPlanBtnClick" class="waves-effect waves-light btn create-btn">Create Plan</button>
+            </div>
+            <div class="center search">
+                <div id="search-input" placeholder="Search">
+                    <form @submit.prevent="onSearch">
+                        <input type="search" class="hh search-input search-input--material" v-model="search"
+                            placeholder="Search">
+                    </form>
+                </div>
+            </div>
+            <div class="report-unit-sec">
+                <div class="row plan-and-report-row">
+                    <v-ons-card class="card-radius plan-card">
+                        <div>
+                            <div class="content" v-for="item in unit_reports" :key="item.id"
+                                @click="unitItemClick(item.id, item.organization.id, item.reportStatusDescription)">
+                                <p class="report-card">{{ item.description }}</p>
+                            </div>
+                        </div>
+                    </v-ons-card>
+
+                    <div class="test">
+                        <ons-list>
+                            <ons-list-item v-for="item in unit_reports" :key="item.id"
+                                @click="unitItemClick(item.id, item.organization.id, item.reportStatusDescription)">
+                                <div class="center">
+                                    <div class="list__item__title">{{ item.description }}</div>
+                                    <div class="list__item__subtitle"><span>{{ item.reportStatusDescription }}</span>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="copy-section">
+                                        <ons-icon class="ons-icon fa fa-copy copy-icon" icon="copy"></ons-icon>
+                                        <span class="icon-text">Copy</span>
+                                    </div>
+                                </div>
+                            </ons-list-item>
+                        </ons-list>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </v-ons-page>
+</div>
