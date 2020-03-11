@@ -1,0 +1,59 @@
+<div class="supporter-member">
+  <v-container class="container head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="v-subheader content-header theme--light">
+          <div class="left" @click="backButton">
+            <ons-back-button></ons-back-button>
+          </div>
+          Supporter Member
+          <v-spacer />
+        </v-subheader>
+        <v-row class="row form-row mb-0">
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="Last Period" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12">
+            <input name="target" v-model="target" label="Target" placeholder="Upgrade Target" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="increased" v-model="increased" label="Increased" placeholder="Increased" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="decreased" v-model="decreased" label="Decreased" placeholder="Decreased" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="thisPeriod" v-model="thisPeriod" label="" placeholder="This Period" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="memberContact" v-model="memberContact" label="Member Contact" placeholder="Personal Contact"
+              single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="comment" v-model="comment" label="Comment" placeholder="Comment" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <input name="nameAndContactNumber" v-model="nameAndContactNumber" label="" placeholder="Name and contact"
+              single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <input name="action" v-model="action" label="" placeholder="Action" single-line />
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn">Save</button>
+        </v-row>
+      </form>
+      <!-- <div class="reference-btn-section">
+        <router-link to='/plan-and-report-edit/regular-and-special-meetings'>
+          <div class="row">
+            <v-col cols="12" class="col-field col col-12">
+              <v-text name="comment" v-model="comment" label="Comment" placeholder="Comment" single-line
+                class="reference-btn">
+                Go to >> Regular &amp; Special Meetings/Programs
+              </v-text>
+            </v-col>
+          </div>
+        </router-link>
+      </div> -->
+    </div>
+  </v-container>
+</div>
