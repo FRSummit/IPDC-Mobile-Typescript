@@ -1,0 +1,35 @@
+<div class="member">
+  <v-container class="container head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="v-subheader content-header">
+          <div class="left" @click="backButton">
+            <ons-back-button></ons-back-button>
+          </div>
+          GroupStudyDiscussion
+          <v-spacer />
+        </v-subheader>
+        <v-row class="row form-row">
+          <v-col cols="12" class="col-field col col-12">
+            <input name="target" v-model="target" label="Target" placeholder="Target" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12">
+            <input name="dateAndAction" v-model="dateAndAction" label="Date And Action" placeholder="Date And Action"
+              single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="actual" v-model="actual" label="Actual" placeholder="Actual" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="averageAttendance" v-model="averageAttendance" label="Average Attendance"
+              placeholder="Average Attendance" single-line />
+          </v-col>
+          <v-col cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <input name="comment" v-model="comment" label="Comment" placeholder="Comment" single-line />
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn">Save</button>
+        </v-row>
+      </form>
+    </div>
+  </v-container>
+</div>
