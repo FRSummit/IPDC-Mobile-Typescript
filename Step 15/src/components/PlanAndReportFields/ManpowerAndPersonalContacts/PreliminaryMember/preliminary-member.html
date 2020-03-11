@@ -1,0 +1,140 @@
+<div class="preliminary-member">
+  <v-container class="container head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="v-subheader content-header theme--light">
+          <div class="left" @click="backButton">
+            <ons-back-button></ons-back-button>
+          </div>
+          Preliminary Member
+          <v-spacer />
+        </v-subheader>
+        <v-row class="row form-row mb-0">
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Last Period</label>
+            <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12">
+            <label>Upgrade Target</label>
+            <input name="target" v-model="target" label="Target" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Increased</label>
+            <input name="increased" v-model="increased" label="Increased" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Decreased</label>
+            <input name="decreased" v-model="decreased" label="Decreased" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>This Period</label>
+            <input name="thisPeriod" v-model="thisPeriod" label="" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Personal Contact</label>
+            <input name="memberContact" v-model="memberContact" label="Member Contact" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Comment</label>
+            <input name="comment" v-model="comment" label="Comment" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <label>Name and contact</label>
+            <input name="nameAndContactNumber" v-model="nameAndContactNumber" label="" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <label>Action</label>
+            <input name="action" v-model="action" label="" placeholder="" single-line />
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn"><i
+              class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        </v-row>
+      </form>
+    </div>
+  </v-container>
+</div>
+
+<!-- <div class="preliminary-member">
+  <v-container class="container head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="v-subheader content-header theme--light">
+          <div class="left" @click="backButton">
+            <ons-back-button></ons-back-button>
+          </div>
+          Preliminary Member
+          <v-spacer />
+        </v-subheader>
+        <v-row class="row form-row mb-0">
+          <v-col style="text-align: left" cols="12" class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label style="font-size: 16px;">Last Period</label>
+            <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="Last Period" single-line v-if="lastPeriod === null"/>
+            <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="Last Period" single-line v-if="lastPeriod !== null" readonly/>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Last Period</label>
+            <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="" single-line
+              v-if="lastPeriod === null" />
+            <input name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="Last Period" single-line
+              v-if="lastPeriod !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12">
+            <label>Target</label>
+            <input name="target" v-model="target" label="Target" placeholder="" single-line v-if="target === null" />
+            <input name="target" v-model="target" label="Target" placeholder="Upgrade Target" single-line
+              v-if="target !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Increased</label>
+            <input name="increased" v-model="increased" label="Increased" placeholder="" single-line
+              v-if="increased === null" />
+            <input name="increased" v-model="increased" label="Increased" placeholder="Increased" single-line
+              v-if="increased !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Decreased</label>
+            <input name="decreased" v-model="decreased" label="Decreased" placeholder="" single-line
+              v-if="decreased === null" />
+            <input name="decreased" v-model="decreased" label="Decreased" placeholder="Decreased" single-line
+              v-if="decreased !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>This Period</label>
+            <input name="thisPeriod" v-model="thisPeriod" label="This Period" placeholder="This Period" single-line
+              v-if="thisPeriod === null" />
+            <input name="thisPeriod" v-model="thisPeriod" label="This Period" placeholder="This Period" single-line
+              v-if="thisPeriod !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Member Contact</label>
+            <input name="memberContact" v-model="memberContact" label="Member Contact" placeholder="" single-line
+              v-if="memberContact === null" />
+            <input name="memberContact" v-model="memberContact" label="Member Contact" placeholder="Personal Contact"
+              single-line v-if="memberContact !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Comment</label>
+            <input name="comment" v-model="comment" label="Comment" placeholder="" single-line
+              v-if="comment === null" />
+            <input name="comment" v-model="comment" label="Comment" placeholder="Comment" single-line
+              v-if="comment !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <label>Name and Contact</label>
+            <input name="nameAndContactNumber" v-model="nameAndContactNumber" label="Name and Contact" placeholder=""
+              single-line v-if="nameAndContactNumber === null" />
+            <input name="nameAndContactNumber" v-model="nameAndContactNumber" label="Name and Contact"
+              placeholder="Name and contact" single-line v-if="nameAndContactNumber !== null" readonly />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <label>Action</label>
+            <input name="action" v-model="action" label="Action" placeholder="" single-line v-if="action === null" />
+            <input name="action" v-model="action" label="Action" placeholder="Action" single-line v-if="action !== null"
+              readonly />
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn"><i
+              class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        </v-row>
+      </form>
+    </div>
+  </v-container>
+</div> -->

@@ -1,0 +1,35 @@
+<div class="patient-visit">
+  <v-container class="container head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="v-subheader content-header">
+          <div class="left" @click="backButton">
+            <ons-back-button></ons-back-button>
+          </div>
+          Patient patient-visit
+          <v-spacer />
+        </v-subheader>
+        <v-row class="row form-row mb-0">
+          <v-col class="col-field col col-12">
+            <label>Target</label>
+            <input name="target" v-model="target" label="Target" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12">
+            <label>Date And Action</label>
+            <input name="dateAndAction" v-model="dateAndAction" label="Date And Action" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Actual</label>
+            <input name="actual" v-model="actual" label="Actual" placeholder="" single-line />
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Comment</label>
+            <input name="comment" v-model="comment" label="Comment" placeholder="" single-line />
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn"><i
+            class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        </v-row>
+      </form>
+    </div>
+  </v-container>
+</div>
