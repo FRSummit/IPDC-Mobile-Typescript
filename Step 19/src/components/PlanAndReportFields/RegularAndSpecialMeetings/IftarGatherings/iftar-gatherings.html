@@ -1,0 +1,38 @@
+<div class="iftar-gatherings">
+  <v-container class="container head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="v-subheader content-header">
+          <div class="left" @click="backButton">
+            <ons-back-button></ons-back-button>
+          </div>
+          Iftar Gatherings
+        </v-subheader>
+        <v-row class="row form-row">
+          <v-col class="col-field col col-12">
+            <label>Target</label>
+            <input name="target" v-model="target" label="Target" placeholder="" single-line :readonly="isEditable()" type="number" min="0"/>
+          </v-col>
+          <v-col class="col-field col col-12">
+            <label>Date And Action</label>
+            <input name="dateAndAction" v-model="dateAndAction" label="" placeholder="" single-line :readonly="isEditable()"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Actual</label>
+            <input name="actual" v-model="actual" label="Actual" placeholder="" single-line :readonly="isEditable()" type="number" min="0"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Average Attendance</label>
+            <input name="averageAttendance" v-model="averageAttendance" label="Average Attendance" placeholder="" single-line :readonly="isEditable()" type="number" min="0"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Comment</label>
+            <input name="comment" v-model="comment" label="Comment" placeholder="" single-line :readonly="isEditable()"/>
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn">
+            <i class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        </v-row>
+      </form>
+    </div>
+  </v-container>
+</div>

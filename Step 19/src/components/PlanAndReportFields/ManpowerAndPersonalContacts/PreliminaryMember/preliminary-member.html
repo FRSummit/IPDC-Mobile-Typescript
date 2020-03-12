@@ -1,0 +1,55 @@
+<div class="preliminary-member">
+  <v-container class="container head-container">
+    <div class="content-div">
+      <form class="form-cls" @submit.prevent="onSubmit">
+        <v-subheader class="v-subheader content-header theme--light">
+          <div class="left" @click="backButton">
+            <ons-back-button></ons-back-button>
+          </div>
+          Preliminary Member
+          <v-spacer />
+        </v-subheader>
+        <v-row class="row form-row mb-0">
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Last Period</label>
+            <input type="number" name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="" single-line id="lastPeriod" :readonly="isEditable()" min="0" max="9999"/>
+          </v-col>
+          <v-col class="col-field col col-12">
+            <label>Upgrade Target</label>
+            <input type="number" name="target" v-model="target" label="Target" placeholder="" single-line id="target" :readonly="isEditable()" min="0" max="9999"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Increased</label>
+            <input type="number" name="increased" v-model="increased" label="Increased" placeholder="" single-line id="increased" :readonly="isEditable()" min="0" max="9999"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Decreased</label>
+            <input type="number" name="decreased" v-model="decreased" label="Decreased" placeholder="" single-line id="decreased" :readonly="isEditable()" min="0" max="9999"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>This Period</label>
+            <input type="number" name="thisPeriod" v-model="thisPeriod" label="" placeholder="" single-line id="thisPeriod" :readonly="isEditable()" min="0" max="9999"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Personal Contact</label>
+            <input type="number" name="memberContact" v-model="memberContact" label="Member Contact" placeholder="" single-line id="memberContact" :readonly="isEditable()" min="0" max="9999"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'REPORT'">
+            <label>Comment</label>
+            <input name="comment" v-model="comment" label="Comment" placeholder="" single-line id="comment" :readonly="isEditable()"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <label>Name and contact</label>
+            <input name="nameAndContactNumber" v-model="nameAndContactNumber" label="" placeholder="" single-line id="nameAndContactNumber" :readonly="isEditable()"/>
+          </v-col>
+          <v-col class="col-field col col-12" v-if="planOrReportTab === 'PLAN'">
+            <label>Action</label>
+            <input name="action" v-model="action" label="" placeholder="" single-line id="action" :readonly="isEditable()"/>
+          </v-col>
+          <button type="submit" large color="blue white--text" class="member save-btn" id="btn">
+            <i class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        </v-row>
+      </form>
+    </div>
+  </v-container>
+</div>
