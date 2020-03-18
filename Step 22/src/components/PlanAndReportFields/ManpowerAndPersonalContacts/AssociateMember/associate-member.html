@@ -1,0 +1,50 @@
+<div class="input-field">
+  <div class="input-header-section">
+    <ons-back-button class="ons-back-btn" @click="backButton"></ons-back-button>
+    <ons-list-header class="heading-title">Associate Member</ons-list-header>
+  </div>
+  <form class="form-cls" @submit.prevent="onSubmit">
+    <ons-list>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Last Period</label>
+        <input type="number" name="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="" single-line id="lastPeriod" :readonly="isEditable() || planOrReportTab === 'REPORT'" min="0" max="9999"/>
+      </ons-list-item>
+      <ons-list-item class="input-items">
+        <label class="ons-input-label">Upgrade Target</label>
+        <input type="number" name="target" v-model="target" label="Target" placeholder="" single-line id="target" :readonly="isEditable() || planOrReportTab === 'REPORT'" min="0" max="9999"/>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Increased</label>
+        <input type="number" name="increased" v-model="increased" label="Increased" placeholder="" single-line id="increased" :readonly="isEditable()" min="0" max="9999" @keypress="memberIncreasedEdit($event)"/>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Decreased</label>
+        <input type="number" name="decreased" v-model="decreased" label="Decreased" placeholder="" single-line id="decreased" :readonly="isEditable()" min="0" max="9999" @keypress="memberDecreasedEdit($event)"/>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">This Period</label>
+        <input type="number" name="thisPeriod" v-model="thisPeriod" label="" placeholder="" single-line id="thisPeriod" :readonly="isEditable() || planOrReportTab === 'REPORT'" min="0" max="9999"/>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Personal Contact</label>
+        <input type="number" name="memberContact" v-model="memberContact" label="Member Contact" placeholder="" single-line id="memberContact" :readonly="isEditable()" min="0" max="9999"/>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Comment</label>
+        <input type="text" name="comment" v-model="comment" label="Comment" placeholder="" single-line id="comment" :readonly="isEditable()"/>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'PLAN'">
+        <label class="ons-input-label">Name and contact</label>
+        <input type="text" name="nameAndContactNumber" v-model="nameAndContactNumber" label="" placeholder="" single-line id="nameAndContactNumber" :readonly="isEditable()"/>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'PLAN'">
+        <label class="ons-input-label">action</label>
+        <input type="text" name="action" v-model="action" label="" placeholder="" single-line id="action" :readonly="isEditable()"/>
+      </ons-list-item>
+        <div class="field-save-btn">
+          <button type="submit" large color="blue white--text" class="member save-btn" id="btn">
+            <i class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        </div>
+    </ons-list>
+  </form>
+</div>

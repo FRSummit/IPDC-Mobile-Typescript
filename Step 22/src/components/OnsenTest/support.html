@@ -1,0 +1,46 @@
+<ons-page id="member">
+  <ons-toolbar>
+      <div class="left">
+          <ons-back-button>Back</ons-back-button>
+      </div>
+      <div class="center">Member</div>
+      <ons-fab class="right user-icon" onclick="fn.showDialog('popover-dialog')">
+          <img id="info-button" class="user-img" src="Car.jpg" alt="User">
+      </ons-fab>
+  </ons-toolbar>
+
+  <div>
+      <ons-list>
+          <ons-list-header class="heading-title">Member</ons-list-header>
+          <ons-list-item class="input-items">
+              <ons-input class="input-field" modifier="material" placeholder="Last Period"></ons-input>
+          </ons-list-item>
+          <ons-list-item>
+              <ons-input class="input-field" modifier="material" placeholder="Target"></ons-input>
+          </ons-list-item>
+          <ons-list-item>
+              <ons-input class="input-field" modifier="material" placeholder="Actual"></ons-input>
+          </ons-list-item>
+          <ons-list-item>
+              <ons-input class="input-field" modifier="material" placeholder="Increased"></ons-input>
+          </ons-list-item>
+          <ons-list-item>
+              <ons-input class="input-field" modifier="material" placeholder="Decreased"></ons-input>
+          </ons-list-item>
+          <ons-list-item>
+              <ons-input class="input-field" modifier="material" placeholder="Member Contact"></ons-input>
+          </ons-list-item>
+          <ons-list-item>
+              <ons-input class="input-field" modifier="material" placeholder="Comment"></ons-input>
+          </ons-list-item>
+          <ons-button class="button-margin next-button"
+              onclick="fn.pushPage({'id': 'associateMember.html', 'title': 'associateMember'})">
+              Save
+          </ons-button>
+      </ons-list>
+  </div>
+  <div class="dots">
+      <span id="dot0" class="dot" onclick="fn.loadView(1)">
+      </span>
+  </div>
+</ons-page>

@@ -1,0 +1,30 @@
+<div class="input-field">
+  <div class="input-header-section">
+    <ons-back-button class="ons-back-btn" @click="backButton"></ons-back-button>
+    <ons-list-header class="heading-title">Book Distribution</ons-list-header>
+  </div>
+  <form class="form-cls" @submit.prevent="onSubmit">
+      <ons-list>
+        <ons-list-item class="input-items">
+          <label class="ons-input-label">Target</label>
+          <input name="target" v-model="target" label="Target" placeholder="" single-line :readonly="isEditable()" type="number" min="0" max="9999"/>
+        </ons-list-item>
+        <ons-list-item class="input-items">
+          <label class="ons-input-label">Date And Action</label>
+          <input name="dateAndAction" v-model="dateAndAction" label="Date And Action" placeholder="" single-line :readonly="isEditable()"/>
+        </ons-list-item>
+        <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+          <label class="ons-input-label">Actual</label>
+          <input name="actual" v-model="actual" label="Actual" placeholder="" single-line :readonly="isEditable()" type="number" min="0"/>
+        </ons-list-item>
+        <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+          <label class="ons-input-label">Comment</label>
+          <input name="comment" v-model="comment" label="Comment" placeholder="" single-line :readonly="isEditable()"/>
+        </ons-list-item>
+        <div class="field-save-btn">
+          <button type="submit" large color="blue white--text" class="member save-btn" id="btn">
+            <i class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        </div>
+    </ons-list>
+  </form>
+</div>

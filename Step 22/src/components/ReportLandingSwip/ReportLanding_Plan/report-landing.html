@@ -1,0 +1,830 @@
+<div class="report-landing">
+    <div class="report-des plan-section" v-for="(i, j) in orgReport" :key="j">
+        <p>
+            <!-- <span class="report-title"><i class="fas fa-file"></i></span>  -->
+            <span class="report-text report-subtitle">{{ removeUnderLine(i.description) }}</span></p>
+        <p><span class="report-text">{{ i.organization.description }}</span></p>
+        <p><span class="report-text">{{ formatreports(i.reportStatusDescription) }}</span></p>
+    </div>
+    <v-container class="container">
+
+        <!-- <hr /> -->
+        <!-- <div class="report-des report-section" v-for="(i, j) in orgReport" :key="j">
+            <p><span class="report-label report-title">Report : </span> <span
+                    class="report-text report-subtitle">{{ removeUnderLine(i.description) }}</span></p>
+            <p><span class="report-label">Organization : </span> <span
+                    class="report-text">{{ i.organization.description }}</span></p>
+            <p><span class="report-label">Status : </span> <span
+                    class="report-text">{{ formatreports(i.reportStatusDescription) }}</span></p>
+        </div> -->
+        <!-- <hr /> -->
+        <div class="submit-btn" v-if="this.$store.state.reportStatus === 'Draft'">
+            <v-row class="row submit-btn-sec">
+                <v-col class="col-sm-4 btn-col col">
+                    <v-btn center large class="white--text plan-page-btn right save-btn submitPlan-btn"
+                        @click="submitPlan">
+                        <i class="fas fa-chart-line save-icon"></i>Submit</v-btn>
+                </v-col>
+            </v-row>
+        </div>
+
+        <div class="content-div">
+            <div class="report-inner-section">
+                <v-subheader class="content-header v-subheader theme--light">Manpower &amp; Personal Contacts
+                </v-subheader>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/member'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye targer-icon"> 2</i>
+                                                <i class="fas fa-arrow-up increase-icon" v-if="planOrReportTab === 'REPORT'"> 4</i>
+                                                <i class="fas fa-arrow-down decrease-icon" v-if="planOrReportTab === 'REPORT'"> 2</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/associate-member'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Associate Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye targer-icon"> 2</i>
+                                                <i class="fas fa-arrow-up increase-icon" v-if="planOrReportTab === 'REPORT'"> 4</i>
+                                                <i class="fas fa-arrow-down decrease-icon" v-if="planOrReportTab === 'REPORT'"> 2</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/preliminary-member'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Preliminary Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye targer-icon"> 2</i>
+                                                <i class="fas fa-arrow-up increase-icon" v-if="planOrReportTab === 'REPORT'"> 4</i>
+                                                <i class="fas fa-arrow-down decrease-icon" v-if="planOrReportTab === 'REPORT'"> 2</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/supporter-member'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Supporter Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye targer-icon"> 2</i>
+                                                <i class="fas fa-arrow-up increase-icon" v-if="planOrReportTab === 'REPORT'"> 4</i>
+                                                <i class="fas fa-arrow-down decrease-icon" v-if="planOrReportTab === 'REPORT'"> 2</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section">
+                <v-subheader class="content-header v-subheader theme--light">Regular &amp; Special Meetings/Programs
+                </v-subheader>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/worker-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Worker Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/cms-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">CMS Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/sm-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">SM Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/member-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Member Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/dawah-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Dawah Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/state-leader-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">State Leader
+                                            Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/state-outing'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">State Outing
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/iftar-gathering'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Iftar
+                                            Gatherings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/learning-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Learning
+                                            Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/social-dawa-program'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Social Dawah
+                                            Programs
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/dawa-group'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Dawah Groups
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/next-g-meeting'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">NextG Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/tafsir-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Tafsir Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/unit-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Unit Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/bbq-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">BBQ Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/gathering-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Gathering
+                                            Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/family-visit-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Family Visit
+                                            Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/eid-re-union-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Eid Re-union
+                                            Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/other-meeting'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Other Meetings
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section">
+                <v-subheader class="content-header v-subheader theme--light">Teaching &amp; Learning Program
+                </v-subheader>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/group-study-discussion'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Group
+                                            Study/Discussion
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/study-circle'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Study Circle
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/study-circle-am'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Study Circle
+                                            (AM)
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/practice-darsSpeech'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            Practice Dars/Speech
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-learning-camp'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            State - Learning Camp (LC)
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/quran-study'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Quran Study
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/hadith-study'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Hadith Study
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/quran-class'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Quran Class
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/weekend-islamic-school'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            Weekend Islamic School
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-ayat'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Memorizing Ayat
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-hadith'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            Memorizing Hadith
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-doa'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Memorizing Doa
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-learning-session'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            State - Learning Session
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-qiyamul-lail'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            State - Qiyamul Lail
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/other'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Other
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section">
+                <v-subheader class="content-header v-subheader theme--light">Dawah Material Distribution</v-subheader>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/book-sale'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Book Sale
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/book-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Book
+                                            Distribution
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/audio-sale'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            VHS/DVD/VCD/CD/Audio Sale
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/audio-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            VHS/DVD/VCD/CD/Audio Distribution
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/email-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Email
+                                            Distribution
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link
+                                to='/plan-and-report-edit/dawah-material-distribution/ipdc-leaflet-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">IPDC Leaflet
+                                            Distribution
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/other-sale'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Other Sale
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/other-distribution'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Other
+                                            Distribution
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section">
+                <v-subheader class="content-header v-subheader theme--light">Finance</v-subheader>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/finance/baitul-mal' class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Baitul-Mal
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/finance/masjid-project' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Masjid Project
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/finance/masjid-table-bank' class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Masjid Table
+                                            Bank
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section">
+                <v-subheader class="content-header v-subheader theme--light">Social Welfare</v-subheader>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/social-welfare/Qard-e-Hasana' class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Qard-e-Hasana
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Patient-Visit' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Patient Visit
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Social-Visit' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Social Visit
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Transport' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Transport
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Shifting' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Shifting
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Shopping' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Shopping
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/food-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Food
+                                            Distribution
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Clean-Up' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Clean Up
+                                            Australia
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Other' class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">Other Social
+                                            Welfare
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <!-- <div class="report-inner-section">
+                <v-subheader class="content-header v-subheader theme--light">Others</v-subheader>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/other' class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable class="v-list-item__title content-item-title">Book Library
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/other' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable class="v-list-item__title content-item-title">Other Library
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/other' class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable class="v-list-item__title content-item-title">VHS/DVD/VCD/CD/Audio Library
+                                            
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div> -->
+        </div>
+    </v-container>
+</div>
