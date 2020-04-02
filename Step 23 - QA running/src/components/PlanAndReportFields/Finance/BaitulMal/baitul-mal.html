@@ -1,0 +1,112 @@
+<div class="input-field">
+  <div class="progress-bar-section" v-if="progressbar">
+    <div class="loader-section">
+      <div class="loader">Loading...</div>
+    </div>
+  </div>
+  <div class="input-header-section">
+    <ons-back-button class="ons-back-btn" @click="backButton"></ons-back-button>
+    <ons-list-header class="heading-title">Baitul-Mal</ons-list-header>
+  </div>
+  <form class="form-cls" @submit.prevent="onSubmit">
+    <div class="heading-subtitle">Finance<span class="subtitle-status">{{ planOrReportTabStatusCreate(planOrReportTabStatus) }}</span></div>
+    <ons-list>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Worker Promise Last Period</label>
+        <input name="workerPromiseLastPeriod" id="workerPromiseLastPeriod" v-model="workerPromiseLastPeriod"
+          label="Worker Promise Last Period" placeholder="" single-line
+          :readonly="isEditable() || planOrReportTab === 'REPORT'" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+          min="0" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Last Period Balance</label>
+        <input name="lastPeriod" id="lastPeriod" v-model="lastPeriod" label="Last Period" placeholder="" single-line
+          :readonly="isEditable() || planOrReportTab === 'REPORT'" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+          min="0" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Collected</label>
+        <input name="collection" id="collection" v-model="collection" label="Collection" placeholder="" single-line
+          :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0"
+          @keypress="collectedKeyEvent($event)" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Expense</label>
+        <input name="expense" id="expense" v-model="expense" label="Expense" placeholder="" single-line
+          :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0"
+          @keypress="expenseKeyEvent($event)" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Nisab</label>
+        <input name="nisabPaidToCentral" id="nisabPaidToCentral" v-model="nisabPaidToCentral" label="Nisab"
+          placeholder="" single-line :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+          min="0" @keypress="nisabKeyEvent($event)" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Balance</label>
+        <span class="period-sec">
+          <span class="default-value" v-if="lastPeriodBalanceFlag">{{ balance }}</span>
+          <span class="decreased-value" v-if="!lastPeriodBalanceFlag">{{ lastPeriod }}</span>
+          <span class="increased-value" v-if="!lastPeriodBalanceFlag" v-model="balance">{{ balance }}</span>
+        </span>
+      </ons-list-item>
+      <ons-list-item class="input-items">
+        <label class="ons-input-label">Worker Promise Target</label>
+        <input name="workerPromiseIncreaseTarget" id="workerPromiseIncreaseTarget" v-model="workerPromiseIncreaseTarget"
+          label="Worker Promise Increase Target" placeholder="" single-line
+          :readonly="isEditable() || planOrReportTab === 'REPORT'" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+          min="0" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Worker Promise Increased</label>
+        <input name="workerPromiseIncreased" id="workerPromiseIncreased" v-model="workerPromiseIncreased"
+          label="Worker Promise Increased" placeholder="" single-line :readonly="isEditable()" type="number"
+          onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" @keypress="WorkerIncreaseKeyEvent($event)" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Worker Promise Decreased</label>
+        <input name="workerPromiseDecreased" id="workerPromiseDecreased" v-model="workerPromiseDecreased"
+          label="Worker Promise Decreased" placeholder="" single-line :readonly="isEditable()" type="number"
+          onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" @keypress="workerDecreaseKeyEvent($event)" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Worker Promise This Period</label>
+        <span class="period-sec">
+          <span class="default-value" v-if="workerPromiseFlag">{{ workerPromiseThisPeriod }}</span>
+          <span class="decreased-value" v-if="!workerPromiseFlag">{{ workerPromiseIncreaseTarget }}</span>
+          <span class="increased-value" v-if="!workerPromiseFlag"
+            v-model="workerPromiseThisPeriod">{{ workerPromiseThisPeriod }}</span>
+        </span>
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Comment</label>
+        <input name="comment" id="comment" v-model="comment" label="Comment" placeholder="" single-line
+          :readonly="isEditable()" type="text" min="0" />
+      </ons-list-item>
+
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'PLAN'">
+        <label class="ons-input-label">Action</label>
+        <input name="action" id="action" v-model="action" label="Action" placeholder="" single-line
+          :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" />
+      </ons-list-item>
+      <!-- <ons-list-item class="input-items">
+          <label class="ons-input-label">Other Source Increase Target</label>
+          <input name="otherSourceIncreaseTarget" id="otherSourceIncreaseTarget" v-model="otherSourceIncreaseTarget" label="Other Source Increase Target" placeholder="" single-line :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0"/>
+        </ons-list-item>
+        <ons-list-item class="input-items">
+          <label class="ons-input-label">Other Source Action</label>
+          <input name="otherSourceAction" id="otherSourceAction" v-model="otherSourceAction" label="Other Source Action" placeholder="" single-line :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0"/>
+        </ons-list-item>
+        <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+          <label class="ons-input-label">Total Increase Target</label>
+          <input name="totalIncreaseTarget" id="totalIncreaseTarget" v-model="totalIncreaseTarget" label="Total Increase Target" placeholder="" single-line :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0"/>
+        </ons-list-item> -->
+      <div class="field-save-btn">
+        <button type="submit" large color="blue white--text" class="member save-btn" id="btn">
+          <i class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        <span class="next-btn" id="next-btn" @click="nextBtn">
+          <i class="fas fa-chevron-circle-right"></i></span>
+      </div>
+    </ons-list>
+  </form>
+</div>

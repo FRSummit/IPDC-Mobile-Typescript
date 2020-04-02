@@ -1,0 +1,39 @@
+<div class="plan-and-reports">
+    <v-ons-page class="Page-MT">
+        <div class="plan-and-reports">
+            <div class="progress-bar-section" v-if="progressbar">
+                <!-- <div class="spinner">
+                    <div class="step1"></div>
+                    <div class="step2"></div>
+                    <div class="step3"></div>
+                </div> -->
+                <div class="loader-section">
+                    <div class="loader">Loading...</div>
+                </div>
+            </div>
+            <div class="report-unit-sec" v-else-if="!progressbar">
+                <div class="row plan-and-report-row">
+                    <div class="test">
+                        <ons-list>
+                            <ons-scroller>
+                                <ons-list-item v-for="item in unit_reports" :key="item.id">
+                                    <div class="center" @click="unitItemClick(item.id, item.organization.id, item.reportStatusDescription)">
+                                        <div class="list__item__title">{{ item.description }}</div>
+                                        <div class="list__item__subtitle">
+                                            <span>{{ formatreports(item.reportStatusDescription) }}, Term: Q{{ item.reportingPeriod.reportingTerm }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="right" v-if="item.reportStatusDescription === 'Submitted'">
+                                        <div class="copy-section" @click="copyPlan(item.id)">
+                                            <i class="far fa-copy copy-icon" icon="copy"></i>
+                                        </div>
+                                    </div>
+                                </ons-list-item>
+                            </ons-scroller>
+                        </ons-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </v-ons-page>
+</div>

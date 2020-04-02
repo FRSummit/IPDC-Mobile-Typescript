@@ -1,0 +1,27 @@
+<div class="create-plan">
+    <v-ons-page class="create-plan-page Page-MT">
+        <div class="create-plan">
+            <div class="progress-bar-section" style="position: fixed; width: 100%; top: 40%;" v-if="progressBar">
+                <div class="loader-section">
+                    <div class="loader">Loading...</div>
+                </div>
+            </div>
+            <div class="container container--fluid">
+                <div class="row mb-0">
+                    <div class="col col-12 select-section">
+                        <select>
+                            <!-- <option disabled value="">Select a Reporting Period</option> -->
+                            <option v-for="(list, i) in selectedOrgReportingPeriod" :key="i" v-bind:value="list">{{ list }}</option>
+                        </select>
+                        <span class="arrow-icon"><i class="mdi mdi-menu-down"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="bottom-container">
+                    <button class="waves-effect copy-btn" @click="copyPlan"><i class="fas fa-plus copy-icon"></i>Copy Plan</button>
+                </div>
+            </div>
+        </div>
+    </v-ons-page>
+</div>

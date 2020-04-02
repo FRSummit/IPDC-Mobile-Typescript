@@ -1,0 +1,2366 @@
+<div class="report-landing">
+    <!-- <div class="report-landing" v-onscroll="onScrollEvent()"> -->
+    <div class="progress-bar-section" v-if="progressbar">
+        <div class="loader-section">
+            <div class="loader">Loading...</div>
+        </div>
+    </div>
+    <!-- <div class="report-des plan-section" v-for="(i, j) in orgReport" :key="j">
+        <p><span class="report-text report-subtitle">{{ removeUnderLine(i.description) }}</span></p>
+        <p><span class="report-text">{{ i.organization.description }}</span></p>
+        <p><span class="report-text">{{ formatreports(i.reportStatusDescription) }}</span></p>
+    </div> -->
+    <v-container class="container">
+        <div class="submit-btn Pt-0" v-if="this.$store.state.reportStatus === 'Draft'">
+            <v-row class="row submit-btn-sec">
+                <v-col class="col-sm-12 btn-col col">
+                    <v-btn center large class="white--text plan-page-btn right save-btn submitPlan-btn"
+                        @click="submitPlan">
+                        <i class="fas fa-chart-line save-icon"></i>Submit</v-btn>
+                </v-col>
+            </v-row>
+        </div>
+
+        <div class="content-div" v-for="i in unit_items">
+
+            <!-- <div class="report-inner-section" id="manpower-section">
+                <v-ons-list-item expandable :expanded.sync="isExpanded" class="accordion-sec">
+                    <div class="accordion-title">Manpower &amp; Personal Contacts
+                        <span class="help-info" @click="showPopover($event, 'down', true)"><i
+                                class="fas fa-info-circle"></i></span>
+                        <v-ons-popover class="help-info-details" cancelable :visible.sync="popoverVisible"
+                            :target="popoverTarget" :direction="popoverDirection" :cover-target="coverTarget">
+                            <div>
+                                <i class="fas fa-history secondary-icon"><span class="icon-text-title">Last
+                                        Period</span></i>
+                                <i class="fas fa-bullseye secondary-icon"><span
+                                        class="icon-text-title">Target</span></i>
+                                <i class="fas fa-arrow-up secondary-icon"><span
+                                        class="icon-text-title">Increased</span></i>
+                                <i class="fas fa-arrow-down secondary-icon"><span
+                                        class="icon-text-title">Decreased</span></i>
+                                <i class="far fa-clock secondary-icon"><span class="icon-text-color">This
+                                        Period</span></i>
+                                <i class="fas fa-check-circle secondary-icon"><span
+                                        class="icon-text-title">Actual</span></i>
+                                <i class="far fa-chart-bar secondary-icon"><span class="icon-text-color">Average
+                                        Attendance</span></i>
+                                <i class="fas fa-briefcase secondary-icon"><span class="icon-text-title">Worker Promise
+                                        Last
+                                        Period</span></i>
+                                <i class="fas fa-plus-circle secondary-icon collected"><span
+                                        class="icon-text-title">Collection</span></i>
+                                <i class="fas fa-minus-circle secondary-icon Expense"><span
+                                        class="icon-text-title">Expense</span></i>
+                                <i class="fas fa-minus-circle secondary-icon nisab"><span
+                                        class="icon-text-color">Nisab</span></i>
+                                <i class="fas fa-dollar-sign secondary-icon"><span
+                                        class="icon-text-title">Balance</span></i>
+                            </div>
+                        </v-ons-popover>
+                    </div>
+                    <div class="expandable-content">
+
+                        <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                            <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                                <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                                    <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/member'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Member</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.memberMemberPlanData.upgradeTarget }}</i>
+                                                    </div>
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+
+                                    <router-link
+                                        to='/plan-and-report-edit/manpower-and-personal-contacts/associate-member'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Associate Member</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.associateMemberPlanData.upgradeTarget }}</i>
+                                                    </div>
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+
+                                    <router-link
+                                        to='/plan-and-report-edit/manpower-and-personal-contacts/preliminary-member'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Preliminary Member</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.preliminaryMemberPlanData.upgradeTarget }}</i>
+                                                    </div>
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+
+                                    <router-link
+                                        to='/plan-and-report-edit/manpower-and-personal-contacts/supporter-member'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Supporter Member</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.supporterMemberPlanData.upgradeTarget }}</i>
+                                                    </div>
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-card>
+
+                    </div>
+                </v-ons-list-item>
+            </div> -->
+            <!-- <div class="report-inner-section" id="regular-section">
+                <v-ons-list-item expandable :expanded.sync="regular" class="accordion-sec">
+                    <div class="accordion-title">Regular &amp; Special Meetings</div>
+                    <div class="expandable-content">
+                        <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                            <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                                <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/worker-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Worker Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.workerMeetingProgramPlanData.target }}</i>
+                                                    </div>
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/cms-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>CMS Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.cmsMeetingProgramPlanData.target }}</i>
+                                                    </div>
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/sm-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>SM Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.smMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/member-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Member Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.memberMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/dawah-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Dawah Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.dawahMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link
+                                        to='/plan-and-report-edit/regular-and-special-meetings/state-leader-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>State Leader Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.stateLeaderMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/state-outing'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>State Outing</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.stateOutingMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/iftar-gathering'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Iftar Gatherings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.iftarMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link
+                                        to='/plan-and-report-edit/regular-and-special-meetings/learning-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Learning Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.learningMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link
+                                        to='/plan-and-report-edit/regular-and-special-meetings/social-dawa-program'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Social Dawah Programs</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.socialDawahMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/dawa-group'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Dawah Groups</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.dawahGroupMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/next-g-meeting'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>NextG Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.nextGMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/tafsir-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Tafsir Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.tafsirMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/unit-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Unit Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.unitMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/bbq-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>BBQ Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.bbqMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link
+                                        to='/plan-and-report-edit/regular-and-special-meetings/gathering-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Gathering Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.gatheringMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link
+                                        to='/plan-and-report-edit/regular-and-special-meetings/family-visit-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Family Visit Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.familyVisitMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link
+                                        to='/plan-and-report-edit/regular-and-special-meetings/eid-re-union-meetings'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Eid Re-union Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.eidReunionMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/regular-and-special-meetings/other-meeting'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Other Meetings</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.otherMeetingProgramPlanData.target }}</i>
+                                                    </div>
+
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-card>
+                    </div>
+                </v-ons-list-item>
+            </div>
+            <div class="report-inner-section" id="teaching-section">
+                <v-ons-list-item expandable :expanded.sync="teaching" class="accordion-sec">
+                    <div class="accordion-title">Teaching &amp; Learning Program</div>
+                    <div class="expandable-content">
+                        <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                            <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                                <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/group-study-discussion'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Group Study/Discussion</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.groupStudyTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/study-circle'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Study Circle</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.studyCircleTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/study-circle-am'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Study Circle (AM)</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.studyCircleForAssociateMemberTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/practice-darsSpeech'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Practice Dars/Speech</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.practiceDarsTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-learning-camp'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>State - Learning Camp (LC)</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.stateLearningCampTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/quran-study'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Quran Study</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.quranStudyTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/hadith-study'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Hadith Study</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.hadithTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/quran-class'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Quran Class</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.quranClassTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/weekend-islamic-school'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Weekend Islamic School</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.weekendIslamicSchoolTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-ayat'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Memorizing Ayat</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.memorizingAyatTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-hadith'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Memorizing Hadith</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.memorizingHadithTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-doa'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Memorizing Doa</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.memorizingDoaTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-learning-session'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>State - Learning Session</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.stateLearningSessionTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-qiyamul-lail'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>State - Qiyamul Lail</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.stateQiyamulLailTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/teaching-and-learning-program/other'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Other</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.otherTeachingLearningProgramPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-card>
+                    </div>
+                </v-ons-list-item>
+            </div>
+            <div class="report-inner-section" id="dawah-section">
+                <v-ons-list-item expandable :expanded.sync="dawah" class="accordion-sec">
+                    <div class="accordion-title">Dawah Material Distribution</div>
+                    <div class="expandable-content">
+                        <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                            <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                                <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                                    <router-link to='/plan-and-report-edit/dawah-material-distribution/book-sale'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Book Sale</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.bookSaleMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/dawah-material-distribution/book-distribution'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Book Distribution</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.bookDistributionMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/dawah-material-distribution/audio-sale'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>VHS/DVD/VCD/CD/Audio Sale</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.vhsSaleMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/dawah-material-distribution/audio-distribution'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>VHS/DVD/VCD/CD/Audio Distribution</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.vhsDistributionMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/dawah-material-distribution/email-distribution'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Email Distribution</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.emailDistributionMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link
+                                        to='/plan-and-report-edit/dawah-material-distribution/ipdc-leaflet-distribution'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>IPDC Leaflet Distribution</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.ipdcLeafletDistributionMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/dawah-material-distribution/other-sale'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Other Sale</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.otherSaleMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/dawah-material-distribution/other-distribution'
+                                        class="router-link">
+                                        <v-list-item
+                                            class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Other Distribution</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.otherDistributionMaterialPlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-card>
+                    </div>
+                </v-ons-list-item>
+            </div>
+            <div class="report-inner-section" id="finance-section">
+                <v-ons-list-item expandable :expanded.sync="finance" class="accordion-sec">
+                    <div class="accordion-title">Finance</div>
+                    <div class="expandable-content">
+                        <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                            <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                                <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                                    <router-link to='/plan-and-report-edit/finance/baitul-mal' class="router-link">
+                                        <v-list-item
+                                            class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Baitul-Mal</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon Worker-Promise-Last-Period">
+                                                            {{ i.baitulMalFinancePlanData.workerPromiseIncreaseTarget.amount }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/finance/masjid-project' class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Masjid Project</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon Worker-Promise-Last-Period">
+                                                            {{ i.aDayMasjidProjectFinancePlanData.workerPromiseIncreaseTarget.amount }}</i>
+                                                    </div>
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/finance/masjid-table-bank' class="router-link">
+                                        <v-list-item
+                                            class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Masjid Table Bank</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon Worker-Promise-Last-Period">
+                                                            {{ i.masjidTableBankFinancePlanData.workerPromiseIncreaseTarget.amount }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-card>
+                    </div>
+                </v-ons-list-item>
+            </div>
+            <div class="report-inner-section" id="social-section">
+                <v-ons-list-item expandable :expanded.sync="social" class="accordion-sec">
+                    <div class="accordion-title">Social Welfare</div>
+                    <div class="expandable-content">
+                        <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                            <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                                <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                                    <router-link to='/plan-and-report-edit/social-welfare/Qard-e-Hasana' class="router-link">
+                                        <v-list-item
+                                            class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Qard-e-Hasana</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.qardeHasanaSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/Patient-Visit' class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Patient Visit</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.patientVisitSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/Social-Visit' class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Social Visit</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.socialVisitSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/Transport' class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Transport</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.transportSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/Shifting' class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Shifting</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.shiftingSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/Shopping' class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Shopping</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.shoppingSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/food-distribution'
+                                        class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Food Distribution</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.foodDistributionSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/Clean-Up' class="router-link">
+                                        <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Clean Up Australia</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.cleanUpAustraliaSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                    <router-link to='/plan-and-report-edit/social-welfare/Other' class="router-link">
+                                        <v-list-item
+                                            class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                            <v-list-item-content class="v-list-item__content">
+                                                <v-ons-list-item modifier="chevron" tappable
+                                                    class="v-list-item__title content-item-title">
+                                                    <div class="plan-report-title">
+                                                        <span>Other Social Welfare</span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="fas fa-bullseye primary-icon">
+                                                            {{ i.otherSocialWelfarePlanData.target }}</i>
+                                                    </div>
+        
+                                                </v-ons-list-item>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </router-link>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-card>
+                    </div>
+                </v-ons-list-item>
+            </div> -->
+
+            <!-- main-section -->
+            <div class="report-inner-section" id="manpower-section">
+                <div class="content-header v-subheader theme--light">Manpower &amp; Personal Contacts
+                    <span class="help-info" @click="showPopover($event, 'down', true)"><i
+                            class="fas fa-info-circle"></i></span>
+                    <v-ons-popover class="help-info-details" cancelable :visible.sync="popoverVisible"
+                        :target="popoverTarget" :direction="popoverDirection" :cover-target="coverTarget">
+                        <div>
+                            <i class="fas fa-history secondary-icon"><span class="icon-text-title">Last
+                                    Period</span></i>
+                            <i class="fas fa-bullseye secondary-icon"><span class="icon-text-title">Target</span></i>
+                            <i class="fas fa-arrow-up secondary-icon"><span class="icon-text-title">Increased</span></i>
+                            <i class="fas fa-arrow-down secondary-icon"><span
+                                    class="icon-text-title">Decreased</span></i>
+                            <i class="far fa-clock secondary-icon"><span class="icon-text-color">This Period</span></i>
+                            <i class="fas fa-check-circle secondary-icon"><span
+                                    class="icon-text-title">Actual</span></i>
+                            <i class="far fa-chart-bar secondary-icon"><span class="icon-text-color">Average
+                                    Attendance</span></i>
+                            <i class="fas fa-briefcase secondary-icon"><span class="icon-text-title">Worker Promise Last
+                                    Period</span></i>
+                            <i class="fas fa-plus-circle secondary-icon collected"><span
+                                    class="icon-text-title">Collection</span></i>
+                            <i class="fas fa-minus-circle secondary-icon Expense"><span
+                                    class="icon-text-title">Expense</span></i>
+                            <i class="fas fa-minus-circle secondary-icon nisab"><span
+                                    class="icon-text-color">Nisab</span></i>
+                            <i class="fas fa-dollar-sign secondary-icon"><span
+                                    class="icon-text-title">Balance</span></i>
+                        </div>
+                    </v-ons-popover>
+                </div>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/member'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.memberMemberPlanData.upgradeTarget }}</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/associate-member'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Associate Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.associateMemberPlanData.upgradeTarget }}</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/preliminary-member'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Preliminary Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.preliminaryMemberPlanData.upgradeTarget }}</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+
+                            <router-link to='/plan-and-report-edit/manpower-and-personal-contacts/supporter-member'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Supporter Member</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.supporterMemberPlanData.upgradeTarget }}</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section" id="regular-section">
+                <div class="content-header v-subheader theme--light">Regular &amp; Special Meetings
+                    <span class="help-info" @click="showPopover($event, 'down', true)"><i
+                            class="fas fa-info-circle"></i></span>
+                </div>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/worker-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Worker Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.workerMeetingProgramPlanData.target }}</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/cms-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>CMS Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.cmsMeetingProgramPlanData.target }}</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/sm-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>SM Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.smMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/member-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Member Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.memberMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/dawah-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Dawah Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.dawahMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/state-leader-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>State Leader Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.stateLeaderMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/state-outing'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>State Outing</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.stateOutingMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/iftar-gathering'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Iftar Gatherings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.iftarMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/learning-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Learning Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.learningMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/social-dawa-program'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Social Dawah Programs</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.socialDawahMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/dawa-group'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Dawah Groups</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.dawahGroupMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/next-g-meeting'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>NextG Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.nextGMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/tafsir-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Tafsir Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.tafsirMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/unit-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Unit Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.unitMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/bbq-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>BBQ Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.bbqMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/gathering-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Gathering Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.gatheringMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/family-visit-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Family Visit Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.familyVisitMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/eid-re-union-meetings'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Eid Re-union Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.eidReunionMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/regular-and-special-meetings/other-meeting'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Other Meetings</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.otherMeetingProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section" id="teaching-section">
+                <div class="content-header v-subheader theme--light">Teaching &amp; Learning Program
+                    <span class="help-info" @click="showPopover($event, 'down', true)"><i
+                            class="fas fa-info-circle"></i></span>
+                </div>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/group-study-discussion'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Group Study/Discussion</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.groupStudyTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/study-circle'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Study Circle</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.studyCircleTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/study-circle-am'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Study Circle (AM)</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.studyCircleForAssociateMemberTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/practice-darsSpeech'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Practice Dars/Speech</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.practiceDarsTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-learning-camp'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>State - Learning Camp (LC)</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.stateLearningCampTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/quran-study'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Quran Study</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.quranStudyTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/hadith-study'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Hadith Study</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.hadithTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/quran-class'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Quran Class</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.quranClassTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/weekend-islamic-school'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Weekend Islamic School</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.weekendIslamicSchoolTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-ayat'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Memorizing Ayat</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.memorizingAyatTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-hadith'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Memorizing Hadith</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.memorizingHadithTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/memorizing-doa'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Memorizing Doa</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.memorizingDoaTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-learning-session'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>State - Learning Session</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.stateLearningSessionTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/state-qiyamul-lail'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>State - Qiyamul Lail</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.stateQiyamulLailTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/teaching-and-learning-program/other'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Other</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.otherTeachingLearningProgramPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section" id="dawah-section">
+                <div class="content-header v-subheader theme--light">Dawah Material Distribution
+                    <span class="help-info" @click="showPopover($event, 'down', true)"><i
+                            class="fas fa-info-circle"></i></span>
+                </div>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/book-sale'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Book Sale</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.bookSaleMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/book-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Book Distribution</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.bookDistributionMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/audio-sale'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>VHS/DVD/VCD/CD/Audio Sale</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.vhsSaleMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/audio-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>VHS/DVD/VCD/CD/Audio Distribution</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.vhsDistributionMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/email-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Email Distribution</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.emailDistributionMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link
+                                to='/plan-and-report-edit/dawah-material-distribution/ipdc-leaflet-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>IPDC Leaflet Distribution</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.ipdcLeafletDistributionMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/other-sale'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Other Sale</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.otherSaleMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/dawah-material-distribution/other-distribution'
+                                class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Other Distribution</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.otherDistributionMaterialPlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section" id="finance-section">
+                <div class="content-header v-subheader theme--light">Finance
+                    <span class="help-info" @click="showPopover($event, 'down', true)"><i
+                            class="fas fa-info-circle"></i></span>
+                </div>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/finance/baitul-mal' class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Baitul-Mal</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon Worker-Promise-Last-Period">
+                                                    {{ i.baitulMalFinancePlanData.workerPromiseIncreaseTarget.amount }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/finance/masjid-project' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Masjid Project</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon Worker-Promise-Last-Period">
+                                                    {{ i.aDayMasjidProjectFinancePlanData.workerPromiseIncreaseTarget.amount }}</i>
+                                            </div>
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/finance/masjid-table-bank' class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Masjid Table Bank</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon Worker-Promise-Last-Period">
+                                                    {{ i.masjidTableBankFinancePlanData.workerPromiseIncreaseTarget.amount }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+
+            <div class="report-inner-section" id="social-section">
+                <div class="content-header v-subheader theme--light">Social Welfare
+                    <span class="help-info" @click="showPopover($event, 'down', true)"><i
+                            class="fas fa-info-circle"></i></span>
+                </div>
+                <v-card class="mx-auto v-card v-sheet theme--light v-card v-sheet theme--light">
+                    <v-list class="list-box v-list v-sheet v-sheet--tile theme--light">
+                        <v-list-item-group class="v-item-group theme--light v-list-item-group">
+                            <router-link to='/plan-and-report-edit/social-welfare/Qard-e-Hasana' class="router-link">
+                                <v-list-item
+                                    class="list-item-content first-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Qard-e-Hasana</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.qardeHasanaSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Patient-Visit' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Patient Visit</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.patientVisitSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Social-Visit' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Social Visit</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.socialVisitSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Transport' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Transport</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.transportSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Shifting' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Shifting</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.shiftingSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Shopping' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Shopping</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.shoppingSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/food-distribution'
+                                class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Food Distribution</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.foodDistributionSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Clean-Up' class="router-link">
+                                <v-list-item class="list-item-content v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Clean Up Australia</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.cleanUpAustraliaSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                            <router-link to='/plan-and-report-edit/social-welfare/Other' class="router-link">
+                                <v-list-item
+                                    class="list-item-content last-li-item v-list-item v-list-item--link theme--light">
+                                    <v-list-item-content class="v-list-item__content">
+                                        <v-ons-list-item modifier="chevron" tappable
+                                            class="v-list-item__title content-item-title">
+                                            <div class="plan-report-title">
+                                                <span>Other Social Welfare</span>
+                                            </div>
+                                            <div>
+                                                <i class="fas fa-bullseye primary-icon">
+                                                    {{ i.otherSocialWelfarePlanData.target }}</i>
+                                            </div>
+
+                                        </v-ons-list-item>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card>
+            </div>
+        </div>
+        <div class="submit-btn" v-if="this.$store.state.reportStatus === 'Draft'">
+            <v-row class="row submit-btn-sec">
+                <v-col class="col-sm-12 btn-col col">
+                    <v-btn center large class="white--text plan-page-btn save-btn submitPlan-btn" @click="submitPlan">
+                        <i class="fas fa-chart-line save-icon"></i>Submit</v-btn>
+                </v-col>
+            </v-row>
+        </div>
+    </v-container>
+</div>

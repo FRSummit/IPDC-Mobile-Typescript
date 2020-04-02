@@ -1,0 +1,50 @@
+<div class="input-field">
+  <div class="progress-bar-section" v-if="progressbar">
+    <div class="loader-section">
+      <div class="loader">Loading...</div>
+    </div>
+  </div>
+  <div class="input-header-section">
+    <ons-back-button class="ons-back-btn" @click="backButton"></ons-back-button>
+    <ons-list-header class="heading-title">Practice Dars/Speech</ons-list-header>
+  </div>
+  <form class="form-cls" @submit.prevent="onSubmit">
+    <div class="heading-subtitle">Teaching &amp; Learning Program<span class="subtitle-status">{{ planOrReportTabStatusCreate(planOrReportTabStatus) }}</span></div>
+    <ons-list>
+      <ons-list-item class="input-items">
+        <label class="ons-input-label">Target</label>
+        <input name="target" v-model="target" label="Target" placeholder="" single-line
+          :readonly="isEditable() || planOrReportTab === 'REPORT'" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+          min="0" />
+      </ons-list-item>
+      <ons-list-item class="input-items">
+        <label class="ons-input-label">Date And Action</label>
+        <input type="text" name="dateAndAction" v-model="dateAndAction" label="Date And Action" placeholder=""
+          single-line :readonly="isEditable() || planOrReportTab === 'REPORT'" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Actual</label>
+        <input name="actual" v-model="actual" label="Actual" placeholder="" single-line :readonly="isEditable()"
+          type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Average Attendance</label>
+        <input name="averageAttendance" v-model="averageAttendance" label="Average Attendance" placeholder=""
+          single-line :readonly="isEditable()" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" />
+      </ons-list-item>
+      <ons-list-item class="input-items" v-if="planOrReportTab === 'REPORT'">
+        <label class="ons-input-label">Comment</label>
+        <input type="text" name="comment" v-model="comment" label="Comment" placeholder="" single-line
+          :readonly="isEditable()" />
+      </ons-list-item>
+      <div class="field-save-btn">
+        <span class="previous-btn" id="previous-btn" @click="previousBtn">
+          <i class="fas fa-chevron-circle-left"></i></span>
+        <button type="submit" large color="blue white--text" class="member save-btn" id="btn">
+          <i class="fas fa-cloud-upload-alt save-icon"></i>Save</button>
+        <span class="next-btn" id="next-btn" @click="nextBtn">
+          <i class="fas fa-chevron-circle-right"></i></span>
+      </div>
+    </ons-list>
+  </form>
+</div>
